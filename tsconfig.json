@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "target": "es5",
+    "target": "es6",
     "jsx": "react",
-    "module": "commonjs",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -16,6 +15,7 @@
     "lib": [
       "es6",
       "es7",
+      "es2017",
       "dom"
     ]
   },
@@ -23,5 +23,17 @@
     "dist",
     "build",
     "node_modules"
-  ]
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "babelOptions": {
+      "babelrc": false,
+      "plugins": [
+        "transform-object-entries"
+      ],
+      "presets": [
+        ["stage-0"]
+      ]
+    }
+  }
 }

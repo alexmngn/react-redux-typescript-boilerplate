@@ -6,6 +6,10 @@ import { createBrowserHistory } from 'history';
 import { configureStore } from './store';
 import { App } from './containers/App';
 
+export interface IHello {
+  hello: string;
+}
+
 const store = configureStore();
 const history = createBrowserHistory();
 

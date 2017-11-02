@@ -7,6 +7,8 @@ import { RouteComponentProps } from 'react-router';
 import { RootState } from '../../reducers';
 import { Header, MainSection } from '../../components';
 
+import { create } from '@zeos/validation';
+
 export namespace App {
   export interface Props extends RouteComponentProps<void> {
     todos: TodoItemData[];
@@ -21,10 +23,33 @@ export namespace App {
 @connect(mapStateToProps, mapDispatchToProps)
 export class App extends React.Component<App.Props, App.State> {
 
+  state = {
+    errors: {
+      email: '',
+    },
+  };
+
+  onPressButton = async () => {
+    const validator = create({
+      email: [{
+        validator: 'email',
+        message: 'Error email',
+      }],
+    });
+
+    const errors = await validator.validate({
+      email: 'hello',
+    });
+
+    this.setState({ errors });
+  }
+
   render() {
     const { todos, actions, children } = this.props;
     return (
       <div className={style.normal}>
+        <button onClick={this.onPressButton}>Button</button>
+        <div>Errors: {this.state.errors.email}</div>
         <Header addTodo={actions.addTodo} />
         <MainSection todos={todos} actions={actions} />
         {children}
